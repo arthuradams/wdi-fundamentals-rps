@@ -93,6 +93,91 @@ function getWinner(playerMove,computerMove) {
     return winner;
 }
 
+function getWinnerAlt(playerMove,computerMove) {
+    var winner;
+    // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
+    // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
+    // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
+    /* YOUR CODE HERE */
+    switch (playerMove) {
+      case "rock":
+        switch (computerMove) {
+          case "rock": // rock ties rock
+            return "tie";
+          case "lizard": // rock crushes lizard
+          case "scissors": // rock breaks scissors
+            return "player";
+          case "spock": // rock is vaporized by Spock
+          case "paper": // rock is covered by paper
+            return "computer";
+          default: // should be impossible to reach
+            return "";
+        }
+        break;
+      case "scissors":
+        switch (computerMove) {
+          case "spock": // scissors are smashed by spock
+          case "rock": // scissors are broken by rock
+            return "computer";
+          case "scissors": // scissors ties scissors
+            return "tie";
+          case "lizard": // scissors decapitates lizard
+          case "paper": // scissors cuts paper
+            return "player";
+          default: // should be impossible to reach
+            return "";
+        }
+        break;
+      case "paper":
+        switch (computerMove) {
+          case "spock": // paper disproves spock
+          case "rock": // paper covers rock
+            return "player";
+          case "lizard": // paper is eaten by lizard
+          case "scissors": // paper is cut by scissors
+            return "computer";
+          case "paper": // paper ties paper
+            return "tie";
+          default: // should be impossible to reach
+            return "";
+          }
+          break;
+        case "lizard":
+          switch(computerMove) {
+            case "spock": // lizard poisons spock
+            case "paper": // lizard eats paper
+              return "player";
+            case "scissors": // lizard is decapiated by scissors
+            case "rock": // lizard is crushed by rock
+              return "computer";
+            case "lizard":
+              return "tie";
+            default: // should be impossible to reach
+              return "";
+            }
+            break;
+          case "spock": {
+            switch(computerMove) {
+              case "scissors": // spock vaporizes scissors
+              case "rock": // spock vaporizes rock
+                return "player";
+              case "paper": // spock is disproven by paper
+              case "lizard": // spock is poisoned by lizard
+                return "computer";
+              case "spock": // spock ties spock
+                return "spock";
+              default: // should be impossible to reach
+                return "";
+              }
+              break;
+          }
+        break;
+      default: // should be very impossible to reach
+        return "";
+    }
+    return ""; // should be very very impossible to reach
+}
+
 function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
