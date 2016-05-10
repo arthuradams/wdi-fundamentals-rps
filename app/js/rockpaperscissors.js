@@ -44,50 +44,50 @@ function getWinner(playerMove,computerMove) {
     switch (playerMove) {
       case "rock":
         switch (computerMove) {
-          case "rock":
+          case "rock": // rock ties rock
             winner = "tie";
             break;
-          case "scissors":
+          case "scissors": // rock breaks scissors
             winner = "player";
             break;
-          case "paper":
+          case "paper": // rock is covered by paper
             winner = "computer";
             break;
-          default:
+          default: // should be impossible to reach
             winner = "";
         }
         break;
       case "scissors":
         switch (computerMove) {
-          case "rock":
+          case "rock": // scissors are brokne by rock
             winner = "computer";
             break;
-          case "scissors":
+          case "scissors": // scissors ties scissors
             winner = "tie";
             break;
-          case "paper":
+          case "paper": // scissors cuts paper
             winner = "player";
             break;
-          default:
+          default: // should be impossible to reach
             winner = "";
         }
         break;
       case "paper":
         switch (computerMove) {
-          case "rock":
+          case "rock": // paper covers rock
             winner = "player";
             break;
-          case "scissors":
+          case "scissors": // paper is cut by scissors
             winner = "computer";
             break;
-          case "paper":
+          case "paper": // paper ties paper
             winner = "tie";
             break;
-          default:
+          default: // should be impossible to reach
             winner = "";
         }
         break;
-      default:
+      default: // should be very impossible to reach
         winner = "";
     }
     return winner;
