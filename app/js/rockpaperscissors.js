@@ -199,6 +199,7 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
+    var ties = 0;
     var errors = 0;
     var winner;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
@@ -207,7 +208,7 @@ function playToFive() {
                                                  // or computerWins reaches 5
       winner = getWinner(getPlayerMove(),getComputerMove() );
       // Get moves for both the human player and the computer
-      switch(winner): {
+      switch(winner) {
         case "player":
           playerWins++; // Up the count of player wins when the player wins
           break;
@@ -220,12 +221,7 @@ function playToFive() {
         default:
           errors++; // Up the count of errors when something unexpected occurs
       }
-/*       if ( winner === "player" ) {
-        playerWins++; // Up the count of player wins when the player wins
-      }
-      else if ( winner === "computer" ) {
-        computerWins++; // Up the count of computer wins when the computer wins
-      } */
+
     }
     return [playerWins, computerWins, ties, errors];
     // I added returning ties and errors. If someone called the function just wanting
