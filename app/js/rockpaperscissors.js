@@ -25,6 +25,8 @@ function getPlayerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
+    // Very straightforward: if a value for move was passed, return it; if not,
+    // return whatever getInput returns.
     return move || getInput();
 }
 
@@ -32,6 +34,8 @@ function getComputerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
+    // Very straightforward: if a value for move was passed, return it; if not,
+    // return whatever randomPlay returns.
     return move || randomPlay();
 }
 
@@ -40,7 +44,13 @@ function getWinner(playerMove,computerMove) {
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
-    /* YOUR CODE HERE */
+    // The "specification" above says getWinner should "set winner to...", so I went with
+    // setting winner to the appropriate value, and later returing that value.
+    // I prefer the approach I took in getWinnerAlt below: the body of each case
+    // is just return value.
+    // I did add code to handle the cases where the input was not an allowed value,
+    // but since it should be impossible for that to happen, it just returns a blank
+    // string.
     switch (playerMove) {
       case "rock":
         switch (computerMove) {
@@ -99,6 +109,13 @@ function getWinnerAlt(playerMove,computerMove) {
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     /* YOUR CODE HERE */
+    // I wrote this as a personal challenge, to expand the game to play
+    // Rock-Scissors-Paper-Lizard-Spock
+    // See: https://en.wikipedia.org/wiki/Rock-paper-scissors#Additional_weapons
+    // It still has the same return values as required for getWinner, and should
+    // work to handle just Rock-paper-scissors, assuming the arguments are
+    // restricted to those three values.
+
     switch (playerMove) {
       case "rock":
         switch (computerMove) {
@@ -182,7 +199,35 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
+    var errors = 0;
+    var winner;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
-    return [playerWins, computerWins];
+    while (playerWins < 5 && computerWins < 5) { // Loop until either of playerWins
+                                                 // or computerWins reaches 5
+      winner = getWinner(getPlayerMove(),getComputerMove() );
+      // Get moves for both the human player and the computer
+      switch(winner): {
+        case "player":
+          playerWins++; // Up the count of player wins when the player wins
+          break;
+        case "computer":
+          computerWins++; // Up the count of computer wins when the computer wins
+          break;
+        case "tie":
+          ties++; // Up the count of ties when there's a tie
+          break;
+        default:
+          errors++; // Up the count of errors when something unexpected occurs
+      }
+/*       if ( winner === "player" ) {
+        playerWins++; // Up the count of player wins when the player wins
+      }
+      else if ( winner === "computer" ) {
+        computerWins++; // Up the count of computer wins when the computer wins
+      } */
+    }
+    return [playerWins, computerWins, ties, errors];
+    // I added returning ties and errors. If someone called the function just wanting
+    // player and computer wins, [player, computer] = playToFive() would still work
 }
